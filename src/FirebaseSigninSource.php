@@ -1,6 +1,6 @@
 <?php
 
-namespace Kkcodes\FirebaseAuth;
+namespace Kyaroslav\FirebaseAuth;
 use Illuminate\Database\Eloquent\Model;
 
 class FirebaseSigninSource extends Model

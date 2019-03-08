@@ -1,14 +1,14 @@
 <?php
 
-namespace Kkcodes\FirebaseAuth\Http;
+namespace Kyaroslav\FirebaseAuth\Http;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-use Kkcodes\FirebaseAuth\FirebaseUser;
-use Kkcodes\FirebaseAuth\FirebaseSigninSource;
+use Kyaroslav\FirebaseAuth\FirebaseUser;
+use Kyaroslav\FirebaseAuth\FirebaseSigninSource;
 
 class FirebaseAuthController extends LoginController
 {
@@ -40,9 +40,13 @@ class FirebaseAuthController extends LoginController
 
                 $source = $data["source"];
 
-                $sourceArr = explode(".", $source);
+                //$sourceArr = explode(".", $source);
 
-                $sourceId = FirebaseSigninSource::where('name','LIKE','%'.$sourceArr[0].'%')
+//                $sourceId = FirebaseSigninSource::where('name','LIKE','%'.$sourceArr[0].'%')
+//                    ->where([
+//                    "active" => 1
+//                ])->first(['id']);
+	            $sourceId = FirebaseSigninSource::where('id', '=', $source)
                     ->where([
                     "active" => 1
                 ])->first(['id']);
@@ -60,8 +64,8 @@ class FirebaseAuthController extends LoginController
                 }
 
                 $id = User::insertGetId([
-                    "name" => $data["name"],
-                    "email" => $data["email"],
+                    "name" => urldecode($data["email"]),
+                    "email" => urldecode($data["email"]),
                     "password" => bcrypt($signInId),
                     "created_at" => Carbon::now()
                 ]);

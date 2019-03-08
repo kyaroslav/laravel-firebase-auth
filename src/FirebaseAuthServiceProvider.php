@@ -1,6 +1,6 @@
 <?php
 
-namespace Kkcodes\FirebaseAuth;
+namespace Kyaroslav\FirebaseAuth;
 
 use Illuminate\Support\ServiceProvider;
 

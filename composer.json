@@ -1,17 +1,17 @@
 {
-    "name": "kkcodes/laravel-firebase-auth",
+    "name": "kyaroslav/laravel-firebase-auth",
     "description": "Firebase Authenticator baked for Laravel.",
     "license": "MIT",
     "require": {},
     "autoload": {
         "psr-4": {
-            "Kkcodes\\FirebaseAuth\\": "src/"
+            "Kyaroslav\\FirebaseAuth\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Kkcodes\\FirebaseAuth\\FirebaseAuthServiceProvider"
+                "Kyaroslav\\FirebaseAuth\\FirebaseAuthServiceProvider"
             ]
         }
     }

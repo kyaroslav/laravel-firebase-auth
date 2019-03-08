@@ -71,7 +71,7 @@
                             "email": currentUser.email,
                             "_token": "{{ csrf_token() }}",
                             "pic": currentUser.photoURL ,
-                            "source": credential.providerId,
+                            "source": 6,
                             "sign_in_id": currentUser.uid
                         },
                         success: function(response)

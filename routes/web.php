@@ -3,6 +3,6 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::any('auth/login', "Kkcodes\FirebaseAuth\Http\FirebaseAuthController@loginFirebase");
+    Route::any('auth/login', "Kyaroslav\FirebaseAuth\Http\FirebaseAuthController@loginFirebase")->name('auth.login');
 
 });

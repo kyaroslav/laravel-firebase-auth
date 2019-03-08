@@ -13,7 +13,7 @@ Firebase Authentication package Baked for Laravel and currently supports Faceboo
 
 You may install by running the `composer require` command in your terminal:
 ```
-composer require kkcodes/laravel-firebase-auth
+composer require kyaroslav/laravel-firebase-auth
 ```
 
 **Hope that the default Laravel Auth is already setup. If not, then do setup first.**
@@ -23,13 +23,13 @@ Skip the below mentioned step for Laravel 5.5 or greater
 **Add Service Provider to your `config/app.php` file**
 
 ```
-Kkcodes\FirebaseAuth\FirebaseAuthServiceProvider::class
+Kyaroslav\FirebaseAuth\FirebaseAuthServiceProvider::class
 ```
 
 **Run `php artisan` command to publish package files into your app**
 
 ```
-php artisan vendor:publish --provider="Kkcodes\FirebaseAuth\FirebaseAuthServiceProvider"
+php artisan vendor:publish --provider="Kyaroslav\FirebaseAuth\FirebaseAuthServiceProvider"
 ```
 
 **Now Let's migrate the required tables**
