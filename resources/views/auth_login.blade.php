@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('head')
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.1/firebaseui.css" />
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/firebaseui/2.6.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
     <script type="text/javascript">
 
@@ -67,7 +67,7 @@
                         type: "POST",
                         async: false,
                         data: {
-                            "name": currentUser.displayName,
+                            // "name": currentUser.displayName,
                             "email": currentUser.email,
                             "_token": "{{ csrf_token() }}",
                             "pic": currentUser.photoURL ,

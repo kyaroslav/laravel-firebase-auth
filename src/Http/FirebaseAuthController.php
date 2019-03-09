@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Kyaroslav\FirebaseAuth\FirebaseUser;
 use Kyaroslav\FirebaseAuth\FirebaseSigninSource;
+use TCG\Voyager\Models\Role as Role;
 
 class FirebaseAuthController extends LoginController
 {
@@ -39,6 +40,7 @@ class FirebaseAuthController extends LoginController
             } else {
 
                 $source = $data["source"];
+	            $pic = isset($data["pic"]) && !empty($data["pic"]) ? $data["pic"] : 'users/default.png';
 
                 //$sourceArr = explode(".", $source);
 
@@ -63,18 +65,26 @@ class FirebaseAuthController extends LoginController
 
                 }
 
+	            $role = Role::where('name', 'user')->first();
+
                 $id = User::insertGetId([
-                    "name" => urldecode($data["email"]),
+                    "name" => uniqid("FBU-"),
                     "email" => urldecode($data["email"]),
                     "password" => bcrypt($signInId),
                     "created_at" => Carbon::now()
                 ]);
 
+	            $user = User::find($id);
+				if (!is_null($user) && !is_null($role)) {
+		            $user->role()->associate($role);
+		            $user->save();
+				}
+
                 FirebaseUser::insert([
                     "user_id" => $id,
                     "sign_in_id" => $signInId,
                     "source_id" => $sourceId,
-                    "pic" => $data["pic"],
+                    "pic" => $pic,
                     "active" => 1,
                     "created_at" => Carbon::now()
                 ]);
