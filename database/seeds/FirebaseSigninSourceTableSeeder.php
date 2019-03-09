@@ -15,12 +15,12 @@ class FirebaseSigninSourceTableSeeder extends Seeder
     {
 
         $source = [
-            "Google" => 1,
-            "Facebook" => 1,
+            "Google" => 0,
+            "Facebook" => 0,
             "Twitter" => 0,
             "Github" => 0,
             "Email" => 0,
-            "Phone" => 0
+            "Phone" => 1
         ];
 
         $insert = [];
