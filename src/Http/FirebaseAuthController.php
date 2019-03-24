@@ -27,14 +27,10 @@ class FirebaseAuthController extends LoginController
         $data = Input::get();
 
         if(!empty($data)) {
-
-
-            $signInId = trim($data["sign_in_id"]);
-
+            $signInId = (isset($data["sign_in_id"]) && !empty($data["sign_in_id"])) ? trim($data["sign_in_id"]) : null ;
             $check = $this->checkExisting($signInId);
 
-            if (!empty($check->user_id)) {
-
+            if (isset($check->user_id) && !empty($check->user_id)) {
                 $id = $check->user_id;
 
             } else {
@@ -91,7 +87,7 @@ class FirebaseAuthController extends LoginController
 
             }
 
-            printf(Auth::check());
+            //printf(Auth::check());
 
             Auth::loginUsingId($id);
 

@@ -2,7 +2,8 @@
 
 @section('head')
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
     <script type="text/javascript">
@@ -103,7 +104,9 @@
             },
             signInOptions: signIn,
             // Terms of service url.
-            tosUrl: '<your-tos-url>'
+            tosUrl: '/tos', //cjapp-2073098949.eu-west-1.elb.amazonaws.com
+            // Privacy Policy Url.
+            privacyPolicyUrl: '/pp'
         };
 
         // Initialize the FirebaseUI Widget using Firebase.
