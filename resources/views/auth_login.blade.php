@@ -58,6 +58,27 @@
         // FirebaseUI config.
         var uiConfig = {
             signInSuccessUrl: '{{ url($data['redirectTo']) }}',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                // {
+                //     provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                //     Whether the display name should be displayed in the Sign Up page.
+                //     requireDisplayName: true
+                // },
+                {
+                    provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+                    // Invisible reCAPTCHA with image challenge and bottom left badge.
+                    recaptchaParameters: {
+                        type: 'image',
+                        size: 'invisible',
+                        badge: 'bottomleft'
+                    }
+                },
+                firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+            ],
             callbacks: {
                 signInSuccess: function (currentUser, credential, redirectUrl) {
 
@@ -68,7 +89,7 @@
                         type: "POST",
                         async: false,
                         data: {
-                            // "name": currentUser.displayName,
+                            "name": currentUser.displayName,
                             "email": currentUser.email,
                             "_token": "{{ csrf_token() }}",
                             "pic": currentUser.photoURL ,
@@ -104,7 +125,7 @@
             },
             signInOptions: signIn,
             // Terms of service url.
-            tosUrl: '/tos', //cjapp-2073098949.eu-west-1.elb.amazonaws.com
+            tosUrl: '/tos',
             // Privacy Policy Url.
             privacyPolicyUrl: '/pp'
         };
@@ -121,7 +142,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 mt-5">
                 <div id="firebaseui-auth-container"></div>
             </div>
         </div>

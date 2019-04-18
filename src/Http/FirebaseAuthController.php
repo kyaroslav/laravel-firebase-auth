@@ -32,18 +32,16 @@ class FirebaseAuthController extends LoginController
 
             if (isset($check->user_id) && !empty($check->user_id)) {
                 $id = $check->user_id;
-
+                if (isset($data["name"]) && !empty($data["name"])) {
+	                $name = (isset($data["name"])) ? urldecode($data["name"]) : uniqid("FBU-");
+	                $user = User::find($id);  // Find the user using model and hold its reference
+	                $user->name = $name;
+	                $user->save();  // Update the data
+                }
             } else {
 
                 $source = $data["source"];
 	            $pic = isset($data["pic"]) && !empty($data["pic"]) ? $data["pic"] : 'users/default.png';
-
-                //$sourceArr = explode(".", $source);
-
-//                $sourceId = FirebaseSigninSource::where('name','LIKE','%'.$sourceArr[0].'%')
-//                    ->where([
-//                    "active" => 1
-//                ])->first(['id']);
 	            $sourceId = FirebaseSigninSource::where('id', '=', $source)
                     ->where([
                     "active" => 1
