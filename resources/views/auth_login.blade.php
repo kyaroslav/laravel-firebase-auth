@@ -2,8 +2,10 @@
 
 @section('head')
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.10.0/firebase-auth.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 
     <script type="text/javascript">
@@ -13,8 +15,7 @@
 
         var jsonParse = JSON.parse(json);
 
-        var signIn = [
-        ];
+        var signIn = [];
         jsonParse.src.forEach(function (value) {
 
             switch (value)
@@ -35,7 +36,16 @@
                     signIn.push(firebase.auth.EmailAuthProvider.PROVIDER_ID);
                     break;
                 case "Phone":
-                    signIn.push(firebase.auth.PhoneAuthProvider.PROVIDER_ID);
+                    signIn.push({
+                        provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+                        // Invisible reCAPTCHA with image challenge and bottom left badge.
+                        recaptchaParameters: {
+                            type: 'image',
+                            size: 'invisible',
+                            badge: 'bottomRigth'
+                        },
+                        defaultCountry: 'GB',
+                    });
                     break;
                 default:
 
@@ -55,30 +65,10 @@
         };
 
         firebase.initializeApp(config);
+
         // FirebaseUI config.
         var uiConfig = {
             signInSuccessUrl: '{{ url($data['redirectTo']) }}',
-            signInOptions: [
-                // Leave the lines as is for the providers you want to offer your users.
-                // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                // {
-                //     provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                //     Whether the display name should be displayed in the Sign Up page.
-                //     requireDisplayName: true
-                // },
-                {
-                    provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-                    // Invisible reCAPTCHA with image challenge and bottom left badge.
-                    recaptchaParameters: {
-                        type: 'image',
-                        size: 'invisible',
-                        badge: 'bottomleft'
-                    }
-                },
-                firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
-            ],
             callbacks: {
                 signInSuccess: function (currentUser, credential, redirectUrl) {
 
@@ -127,7 +117,7 @@
             // Terms of service url.
             tosUrl: '/tos',
             // Privacy Policy Url.
-            privacyPolicyUrl: '/pp'
+            privacyPolicyUrl: 'https://www.citizensjournalist.com/privacy-policy/index.html'
         };
 
         // Initialize the FirebaseUI Widget using Firebase.
