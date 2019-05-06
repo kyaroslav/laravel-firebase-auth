@@ -72,8 +72,10 @@
             callbacks: {
                 signInSuccess: function (currentUser, credential, redirectUrl) {
 
-                    console.log(credential);
-                    console.log(currentUser);
+                    if (typeof(currentUser.displayName) != "string" || typeof(currentUser.email) != "string") {
+                        alert('Please register via mobile application before using portal.')
+                        return true;
+                    }
 
                     $.ajax({
                         type: "POST",
