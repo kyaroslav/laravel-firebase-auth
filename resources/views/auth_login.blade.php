@@ -73,7 +73,7 @@
                 signInSuccess: function (currentUser, credential, redirectUrl) {
 
                     if (typeof(currentUser.displayName) != "string" || typeof(currentUser.email) != "string") {
-                        alert('Please register via mobile application before using portal.')
+                        alert('Please use CJ mobile app for sign up.')
                         return true;
                     }
 
